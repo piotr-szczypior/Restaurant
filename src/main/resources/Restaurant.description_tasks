@@ -1,0 +1,58 @@
+Zadanie 1. Restauracja
+
+Pracujesz nad komponentem do aplikacji zajmującej się zarządzaniem restauracją.
+Aplikacją którą będziesz uzupełniał umożliwić klientom łatwiejszy wybór dań na podstawie ich składu czy preferowanej diety.
+Po uruchomieniu projektu po prawej stronie wybierz zakładkę maven a potem wybierz opcję Lifecycle-compile.
+Podstawowe klasy które istnieją to:
+1) Meal - klasa, która jest "strukturą" posiłku. Klasy tego typu w aplikacjach webowych nazywamy "Transport Objectem".
+2) Produce - klasa, która jest "strukturą" produktu. Posiłek składa się z wielu produktów.
+3) DietType - enum, klasa wyliczeniowa, która posiada typ danego posiłku.
+4) ProductType - enum, klasa wyliczeniowa, która jest typem danego produktu
+5) MenuService - Interfejs który dostarcza "kontrakt" do uzupełnienia. Na jego podstawie implementowane powinny być metody do klasy MenuServiceImpl.
+    Serwisy zazwyczaj zawierają logikę biznesową
+6) MenuServiceImpl - aktualnie pusta klasa
+
+Podpowiedź: Użyj CTRL+SHIFT+F aby poprzez pełnotekstowe wyszukiwanie znaleźć bloki o nazwie "Hint" i "TODO"
+
+Zadania:
+1) MenuServiceImpl:
+    Zmodyfikuj MenuServiceImpl aby implementowała interfejs MenuService (słowo kluczowe implements).
+    Użyj intellij aby automatycznie zaimplementować puste metody z MenuService
+    Zaimplementuj Wszystkie metody z MenuService
+
+
+    Stwórz Klasę MenuServiceTest w której przetestujesz jednostkowo metody z MenuService. Pamiętaj o testach negatywnych.
+2) Modyfikacja instniejącego kodu:
+    Do DietType dodaj typ diety VEGAN.
+    Zmodyfikuj metody wyszukujące po typie diety tak, aby wyszukując potrawy typu VEGETARIAN zwracane były również potrawy typu vegan.
+    Podpowiedź: Najprostsze rozwiązanie to dodanie nowego pola i dodanie kolejnych instrukcji warunkowych.
+                Bardziej finezyjne to odpowiednia zmiana (nowa metoda?) w DietType.
+    Dopasuj i napisz nowe testy jednostkowe które zweryfikują zmodyfikowaną funkcjonalność.
+
+3) Nowa funkcjonalność:
+    Stwórz klasę Storage.
+    Niech ta klasa posiada Mapę produktów z ich ilościami - produkt ma być kluczem, a ilość wartością.
+    Stwórz Interfejs StorageService który będzie posiadał metodę "canMealBePreparedFromProductsInStorage".
+    Metoda niech przyjmuje w parametrze pojedynczy posiłek Meal oraz Storage, niech nie zwraca nic, ale w przypadku niepowodzenia niech rzuca customowym wyjątkiem.
+    Metoda canMealBePreparedFromProductsInStorage powinna zbierać wszystkie produkty z posiłku i porównywać z istniejącymi produktami w storage.
+    Jeśli dla każdego produktu z posiłku liczba tego produktu znaleziona w storage jest > 0, to metoda nie rzuca wyjątkiem. W przeciwnym razie rzuca.
+    Napisz testy jednostkowe sprawdzające tą funkcjonalność
+
+4) Dziedziczenie i superklasy; klasy statyczne
+   Stwórz statyczną klasę CommonStorage
+        Uwaga: w normalnych programach jest to antywzorzec i nie programuje się tak z powodu wycieków pamięci; na nasze potrzeby, do nauki, możemy to zaakceptować.
+   Niech posiada Statyczną mapę produktów wraz z ich ilościami, zainicjalizowaną na starcie.
+   CommonStorage ma udostępniać trzy metody statyczne:
+        checkInStorage(Product) - sprawdza, czy produkt istnieje w CommonStorage
+        addToStorage(Produce product, Integer quantity) - dodaje do mapy z CommonStorage
+        removeFromStorage(Produce product, Integer quantity) - usuwa z mapy CommonStorage
+        clearStorage() - inicjalizuje Mapę na nowo, czyszcząc ją
+   Stwórz klasę MenuStorageServiceImpl; niech będzie to subklasa MenuServiceImpl.
+   Stwórz prywatną metodę canMealBePreparedFromProductsInCommonStorage - logika identyczna jak w zadaniu 3, ale ma wykorzystywać statyczny CommonStorage.
+   Nadpisz wszystkie metody z MenuServiceImpl, i w ciałach tych metod wywołaj ich metody z superklasy (słowo kluczowe super),
+   a następnie sprawdź czy wyfiltrowana lista może być przygotowana, używając canMealBePreparedFromProductsInCommonStorage.
+   Napisz Testy jednostkowe używając pomocniczo metody z adnotacją @BeforeEach. W tej metodzie uzupełnij CommonStorage odpowiednimi produktami.
+
+
+
+
