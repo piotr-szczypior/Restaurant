@@ -30,6 +30,14 @@ public class CommonStorage {
         producePerAmount.put(product, amount);
     }
 
+    public static Map<Produce, Integer> getProducePerAmount() {
+        return producePerAmount;
+    }
+
+    public static void setProducePerAmount(Map<Produce, Integer> producePerAmount) {
+        CommonStorage.producePerAmount = producePerAmount;
+    }
+
     public static void clearStorage() {
         producePerAmount.clear();
     }
