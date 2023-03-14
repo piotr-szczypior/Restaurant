@@ -7,6 +7,8 @@ import domain.eto.Produce;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import service.api.MenuService;
+import service.api.StorageService;
 import service.exception.NoProduceException;
 import service.impl.MenuServiceStorageImpl;
 import service.repo.CommonStorage;
@@ -16,7 +18,7 @@ import java.util.List;
 
 class MenuServiceStorageImplTest {
 
-    MenuServiceStorageImpl menuServiceStorage = new MenuServiceStorageImpl();
+    MenuService menuServiceStorage = new MenuServiceStorageImpl();
 
     @BeforeEach
     public void clearStorage() {
